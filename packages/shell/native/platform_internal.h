@@ -1,7 +1,7 @@
 // Internal contract between the platform dispatcher (platform_core.mm) and the
 // service modules (platform_*.mm). Everything here runs on the main thread.
 //
-// Wire format (same as the GPUI-era bus, packages/platform/src/bus.ts):
+// Wire format (the client side is src/platform/bus.ts):
 //   request  {id, service, op, args}
 //   reply    {ok:true, value} | {ok:false, error:{code, message}}
 //   events   (name, data) — delivered to the Worker sink AND to every page

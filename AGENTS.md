@@ -15,9 +15,6 @@ examples/
   kit-conformance/     SvelteKit's features in the app, a closed bridge list, the build to distribute
 website/          the documentation (blume): website/docs/**
 .github/workflows ci.yml, windows.yml, update-test.yml
-experiments/      earlier work, not kitop. experiments/gpui is a separate project with its own
-                  package.json and AGENTS.md
-documentation/    that project's documentation. Don't edit it
 ```
 
 Each of `packages/shell`, `packages/push-worker`, `examples/*` and `website` installs on its own (`bun install` in it, its own `bun.lock`). The root `package.json` has scripts only (`bun run test`, `build`, `docs`) and no workspaces. The examples and the push worker depend on the shell through `link:`, so install `packages/shell` first.

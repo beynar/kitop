@@ -8,7 +8,7 @@ Say what's affected (the `@kitop/shell` version or commit, the OS), how to repro
 
 ## What's in scope
 
-`@kitop/shell` in `packages/shell`: the Vite plugin, the CLI, the native shells, the updater, and what a page can reach through `bridge.allow`. `packages/push-worker` too. What's under `experiments/` and `documentation/` isn't maintained.
+`@kitop/shell` in `packages/shell`: the Vite plugin, the CLI, the native shells, the updater, and what a page can reach through `bridge.allow`. `packages/push-worker` too.
 
 kitop is `0.x` and not on npm yet: fixes go into the next version, and older ones aren't patched.
 

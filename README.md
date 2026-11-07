@@ -59,8 +59,6 @@ To make your own app a desktop app too, follow [Convert a SvelteKit app](website
 | `examples/kit-conformance` | SvelteKit's features in the app, a closed bridge list, the build to distribute |
 | `website` | The documentation. Run it with `bun run docs` |
 
-kitop uses nothing else in this repository. `experiments/gpui` is an earlier project that renders Svelte through GPUI instead of a web view ([its notes](experiments/gpui/README.md)), with its own `package.json`, and `documentation` is its documentation. The rest of `experiments` is earlier work too, kept for reference.
-
 ## Tests
 
 ```sh

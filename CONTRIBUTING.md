@@ -41,6 +41,5 @@ test/run-platform.sh               # the macOS native suites: real windows
 - Match the code around yours: short, with comments that say why.
 - A fix comes with a test that fails without it.
 - Docs change in the same commit as the code: `website/docs`, and a line in the first section of `packages/shell/CHANGELOG.md`. [Versions and breaking changes](website/docs/reference/versioning.mdx) says what counts as breaking.
-- `experiments/` and `documentation/` hold an earlier project. Leave them be.
 
 To report a vulnerability, see [SECURITY.md](SECURITY.md).

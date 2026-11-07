@@ -1,4 +1,4 @@
-// window.* — every op of the GPUI-era contract (packages/platform/src/index.ts).
+// window.* — every op of the contract in src/platform/index.ts.
 // Coordinates: top-left origin of the primary screen, y down. `windowId` is the
 // public id (0 = primary); absent → the calling page's window (or key/primary).
 // Events (emitted by shell_macos.mm): focusChanged, boundsChanged,
