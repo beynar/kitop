@@ -61,6 +61,8 @@ sign: { identity: 'Developer ID Application: You (TEAMID)', notaryProfile: 'nota
   </Step>
   <Step title="Build">
     Set `CODESIGN_IDENTITY` (or `sign.identity`) and build. `bunx kitop preflight .desktop/dist/<App>.app` runs the same pre-flight on any bundle.
+
+    When two certificates in the keychain have the same name, which Xcode sometimes does, codesign refuses that name. The build and `bunx kitop doctor` stop on it and list the SHA-1 of each certificate. Set `CODESIGN_IDENTITY` to one of them, or delete the certificate you don't use.
   </Step>
 </Steps>
 
@@ -136,7 +138,7 @@ Bun's text is the one of the Bun version kitop is tested with, 1.4.4. Built with
 
 <TypeTable
   type={{
-    identity: { type: "string", default: "$CODESIGN_IDENTITY", description: "codesign identity, or '-' for ad-hoc. Without one, builds are ad-hoc." },
+    identity: { type: "string", default: "$CODESIGN_IDENTITY", description: "codesign identity: the certificate's name, or its SHA-1 when two certificates share that name. '-' for ad-hoc. Without one, builds are ad-hoc." },
     notaryProfile: { type: "string", default: "$NOTARY_PROFILE", description: "notarytool keychain profile. Notarizes and staples when set." },
     hardenedRuntime: { type: "boolean", default: "true unless ad-hoc", description: "Required for notarization." },
     entitlements: { type: "Record<string, boolean | string | string[]>", description: "Merged into the defaults Bun needs." },

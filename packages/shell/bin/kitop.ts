@@ -190,9 +190,12 @@ async function doctor() {
     // Apple's signing tools: nothing to check on another OS.
     if (process.platform === "darwin") {
       const identity = c.sign?.identity ?? process.env.CODESIGN_IDENTITY;
-      const ids = await $`security find-identity -v -p codesigning`.nothrow().text();
-      if (identity) ids.includes(identity) ? ok(`signing identity found: ${identity}`) : bad(`signing identity not in keychain: ${identity}`);
-      else warn(`no signing identity — builds are ad-hoc signed. Available: ${(ids.match(/"([^"]+)"/g) ?? []).join(", ") || "none"}`);
+      const { identityProblem, keychainIdentities } = await import("../src/build/signing-identity.ts");
+      const ids = await keychainIdentities();
+      if (identity) {
+        const problem = identityProblem(identity, ids);
+        problem ? bad(problem.message) : ok(`signing identity found: ${identity}`);
+      } else warn(`no signing identity — builds are ad-hoc signed. Available: ${ids.map((i) => `${i.sha1} "${i.name}"`).join(", ") || "none"}`);
       if (identity && !/Developer ID Application/.test(identity) && !/^[0-9A-F]{40}$/.test(identity)) warn("distribution outside the App Store needs a \"Developer ID Application\" certificate");
       const profile = c.sign?.notaryProfile ?? process.env.NOTARY_PROFILE;
       if (profile) {

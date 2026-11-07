@@ -179,7 +179,7 @@ Every field of `WindowAnimation` is optional. These defaults apply when animatio
 
 <TypeTable
   type={{
-    identity: { type: "string", default: "$CODESIGN_IDENTITY, else ad-hoc", description: "codesign identity ('Developer ID Application: Name (TEAMID)'), or '-' for ad-hoc." },
+    identity: { type: "string", default: "$CODESIGN_IDENTITY, else ad-hoc", description: "codesign identity ('Developer ID Application: Name (TEAMID)', or the certificate's SHA-1 when two certificates share that name), or '-' for ad-hoc." },
     notaryProfile: { type: "string", default: "$NOTARY_PROFILE", description: "notarytool keychain profile; notarizes and staples when set." },
     hardenedRuntime: { type: "boolean", default: "true unless ad-hoc" },
     entitlements: { type: "Record<string, boolean | string | string[]>", description: "Merged into the defaults Bun needs (JIT)." },

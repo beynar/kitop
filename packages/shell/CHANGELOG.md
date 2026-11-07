@@ -129,6 +129,7 @@ The native headers are `kitop.h` for the C ABI, `KitopObjC.h` and `KitopObjC.m` 
 
 ### Fixed
 
+- macOS signing: when codesign refuses a file, the build shows what it said, not a raw buffer. A signing identity two keychain certificates share stops the build before it signs anything, and `kitop doctor` reports it. Both list the SHA-1 of each certificate to set as `CODESIGN_IDENTITY`.
 - A website whose SvelteKit doesn't show its options the way kitop reads them (`api.options`) stops with an error that names the SvelteKit version, as the desktop side does. It used to go on without them, and `.desktop` files and `routes.exclude` stopped applying without a word.
 - `kitop dev --windows` and `kitop build --windows` on a Windows machine: they looked for macOS's library, ran a shell script Windows can't run, and wrote imports with backslashes. They still need Docker Desktop in Linux containers mode, or a `shell.dll` from elsewhere, and `kitop doctor` says so.
 - `kitop create` on Windows named the project after its whole path.

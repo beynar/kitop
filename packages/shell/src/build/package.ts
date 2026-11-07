@@ -182,12 +182,14 @@ function signIdentity(c: ResolvedConfig): string {
   return c.sign?.identity ?? process.env.CODESIGN_IDENTITY ?? "-";
 }
 
-async function codesign(path: string, identity: string, opts: { runtime: boolean; entitlements?: string }) {
+/** Signs one file or bundle. A refusal stops the build with what codesign said, not its raw output. */
+export async function codesign(path: string, identity: string, opts: { runtime: boolean; entitlements?: string }) {
   const args = ["--force", "--sign", identity];
   if (identity !== "-") args.push("--timestamp");
   if (opts.runtime) args.push("--options", "runtime");
   if (opts.entitlements) args.push("--entitlements", opts.entitlements);
-  await $`codesign ${args} ${path}`.quiet();
+  const r = await $`codesign ${args} ${path}`.nothrow().quiet();
+  if (r.exitCode !== 0) throw new Error(`codesign couldn't sign ${basename(path)}: ${r.stderr.toString().trim() || `exit code ${r.exitCode}`}`);
 }
 
 /** The build stops here if what it just signed doesn't verify, and not on a user's machine. */
@@ -198,6 +200,13 @@ export async function verifyCodesign(path: string): Promise<void> {
 
 async function signApp(app: string, exe: string, c: ResolvedConfig, work: string): Promise<"ad-hoc" | "identity"> {
   const identity = signIdentity(c);
+  // Before the first file: a name two certificates share fails on every one of them. One that
+  // isn't found is left to codesign, which can still sign with a certificate the keychain doesn't trust.
+  if (identity !== "-") {
+    const { identityProblem, keychainIdentities } = await import("./signing-identity.ts");
+    const problem = identityProblem(identity, await keychainIdentities());
+    if (problem?.kind === "ambiguous") throw new Error(problem.message);
+  }
   const runtime = c.sign?.hardenedRuntime ?? identity !== "-";
   const entFile = join(work, "entitlements.plist");
   const ent = entitlements(c);

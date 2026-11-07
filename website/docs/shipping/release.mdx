@@ -137,7 +137,7 @@ This part is shared by both ways of releasing.
        ```sh
        base64 -i Certificates.p12 | pbcopy   # the base64 is now in the clipboard
        ```
-    3. **The identity name.** Run `security find-identity -v -p codesigning` and copy the quoted text of the Developer ID line, exactly, for example `Developer ID Application: Acme Inc (AB12CD34EF)`.
+    3. **The identity name.** Run `security find-identity -v -p codesigning` and copy the quoted text of the Developer ID line, exactly, for example `Developer ID Application: Acme Inc (AB12CD34EF)`. If two lines show the same name, use the 40-character SHA-1 printed before the name instead: codesign refuses a name two certificates share.
     4. **A notarization API key.** In [App Store Connect](https://appstoreconnect.apple.com) → **Users and Access** → **Integrations** → **App Store Connect API** → **Team Keys** → **+**, access **Developer**. Download the `AuthKey_XXXXXXXXXX.p8` file (you can only download it once), and copy the **Key ID** and the **Issuer ID** shown on the page. Then:
        ```sh
        base64 -i AuthKey_XXXXXXXXXX.p8 | pbcopy
@@ -569,6 +569,7 @@ Users on `beta` get beta builds. Users on `stable` never see them, because a man
 | --- | --- |
 | `check` fails: tag doesn't match | The tag must be `v` + the `package.json` version. Delete the tag (`git push origin :v1.4.0`), fix, and tag again. |
 | macOS: `no identity found` / `errSecInternalComponent` | `MACOS_SIGNING_IDENTITY` doesn't exactly match the certificate, or the `.p12` password is wrong. Compare with `security find-identity -v -p codesigning` on your Mac. |
+| macOS: signing identity `is ambiguous` | Two certificates in the keychain have that name. The message lists the SHA-1 of each: set `CODESIGN_IDENTITY` (or `MACOS_SIGNING_IDENTITY`) to one of them, or delete the certificate you don't use. |
 | macOS: notarization `Invalid` | The build prints the `xcrun notarytool log <id> --keychain-profile notary` command. Run it on your Mac with the same API key to see Apple's reasons. Run `bunx kitop preflight .desktop/dist/MyApp.app` locally first. |
 | macOS: `notarytool` can't find the profile `notary` | Check the credential-import step, the selected keychain and `APPLE_API_KEY_P8_BASE64`, `APPLE_API_KEY_ID` and `APPLE_API_ISSUER_ID`. |
 | linux: `Package gtk+-3.0 was not found` | The apt step didn't run or failed: it must come before the build. |
