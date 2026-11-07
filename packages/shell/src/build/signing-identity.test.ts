@@ -59,8 +59,9 @@ test.if(process.platform === "darwin")("for real: a codesign refusal reads as co
     copyFileSync("/usr/bin/true", file);
     const err = await codesign(file, "kitop test: no such identity", { runtime: false }).catch((e: Error) => e);
     expect(err).toBeInstanceOf(Error);
-    expect((err as Error).message).toContain("codesign couldn't sign tool");
-    expect((err as Error).message).toContain("no identity found");
+    // codesign's wording depends on the keychain ("no identity found", or "could not be found in
+    // the keychain" on a machine without any certificate): what matters is that it's there, as text.
+    expect((err as Error).message).toMatch(/^codesign couldn't sign tool: .*(identity|keychain)/);
     expect((err as Error).message).not.toContain("Buffer");
   } finally {
     rmSync(dir, { recursive: true, force: true });
