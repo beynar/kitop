@@ -35,11 +35,11 @@ The steps below make that change for you, then get the app running and built.
 - **[Bun](https://bun.sh) 1.4 or newer.** You don't need to move your project to it, but the app's server code will run on it.
 - **On macOS,** the Xcode command line tools (`xcode-select --install`). **On Linux or Windows,** see [Distribution](/shipping/distribution).
 - **Your project committed in git,** so you can read what changes.
-- **The package itself.** `@kitop/shell` isn't on npm yet. Until it is, build it from [the repository](https://github.com/beynar/svelte-desktop):
+- **The package itself.** `@kitop/shell` isn't on npm yet. Until it is, build it from [the repository](https://github.com/beynar/kitop):
 
   ```sh
-  git clone https://github.com/beynar/svelte-desktop
-  cd svelte-desktop/packages/shell
+  git clone https://github.com/beynar/kitop
+  cd kitop/packages/shell
   bun install && bun pm pack --destination /tmp
   ```
 

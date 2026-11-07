@@ -16,10 +16,10 @@
 	"homepage": "https://svelte-desktop-docs.beynar.workers.dev",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/beynar/svelte-desktop.git",
+		"url": "git+https://github.com/beynar/kitop.git",
 		"directory": "packages/shell"
 	},
-	"bugs": "https://github.com/beynar/svelte-desktop/issues",
+	"bugs": "https://github.com/beynar/kitop/issues",
 	"engines": {
 		"bun": ">=1.4.0"
 	},

@@ -12,7 +12,7 @@ export default defineConfig({
   },
   github: {
     owner: "beynar",
-    repo: "svelte-desktop",
+    repo: "kitop",
     dir: "website",
   },
   navigation: {

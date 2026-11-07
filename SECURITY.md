@@ -2,7 +2,7 @@
 
 ## Reporting a vulnerability
 
-Report it privately, through a GitHub security advisory: [Report a vulnerability](https://github.com/beynar/svelte-desktop/security/advisories/new), or the **Security** tab of the repository, then **Report a vulnerability**. Don't open a public issue for it.
+Report it privately, through a GitHub security advisory: [Report a vulnerability](https://github.com/beynar/kitop/security/advisories/new), or the **Security** tab of the repository, then **Report a vulnerability**. Don't open a public issue for it.
 
 Say what's affected (the `@kitop/shell` version or commit, the OS), how to reproduce it, and what an attacker gets. The advisory stays private between you and the maintainers until a fix is out, and you're credited in it unless you'd rather not be.
 
