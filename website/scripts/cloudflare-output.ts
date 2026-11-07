@@ -13,7 +13,7 @@ writeFileSync(join(out, "config.json"), JSON.stringify({ accountId: "6886250e2af
 writeFileSync(
   join(worker, "worker.config.json"),
   JSON.stringify({
-    name: "svelte-desktop-docs",
+    name: "kitop",
     compatibilityDate: "2026-11-01",
     // Blume writes <route>/index.html and links without a trailing slash.
     assets: { htmlHandling: "drop-trailing-slash", notFoundHandling: "404-page" },

@@ -41,7 +41,7 @@ signing identities and the notary profile, and exits non-zero when a check fails
 Requirements: macOS 12+, Bun ≥ 1.4, Xcode command line tools, SvelteKit 3 (`^3.0.0-next.0`),
 `@sveltejs/adapter-bun` at exactly `1.0.0-next.2`, Svelte `^5.56.0`. The package is TypeScript,
 Svelte and native sources: nothing is prebuilt, and the first `dev` or `build` compiles the native
-shell on your machine. [Versions](https://svelte-desktop-docs.beynar.workers.dev/reference/versioning).
+shell on your machine. [Versions](https://kitop.beynar.workers.dev/reference/versioning).
 
 ## What you get
 

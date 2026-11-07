@@ -1,6 +1,6 @@
 # Changelog
 
-Every release of `@kitop/shell`. The [versioning policy](https://svelte-desktop-docs.beynar.workers.dev/reference/versioning) says what each kind of release may change.
+Every release of `@kitop/shell`. The [versioning policy](https://kitop.beynar.workers.dev/reference/versioning) says what each kind of release may change.
 
 ## 0.1.0
 

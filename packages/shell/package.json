@@ -13,7 +13,7 @@
 		"webview",
 		"vite-plugin"
 	],
-	"homepage": "https://svelte-desktop-docs.beynar.workers.dev",
+	"homepage": "https://kitop.beynar.workers.dev",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/beynar/kitop.git",

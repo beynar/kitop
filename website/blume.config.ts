@@ -26,6 +26,6 @@ export default defineConfig({
     llmsTxt: true,
   },
   deployment: {
-    site: "https://svelte-desktop-docs.beynar.workers.dev",
+    site: "https://kitop.beynar.workers.dev",
   },
 });
