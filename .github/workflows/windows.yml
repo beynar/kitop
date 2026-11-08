@@ -89,6 +89,20 @@ jobs:
         if: ${{ !cancelled() }}
         working-directory: packages/shell
         run: bun test src
+      # The runner's Docker (Windows containers) sometimes isn't up yet, and `docker info` then
+      # answers nothing: the test that needs it waits for it here instead of failing on an empty answer.
+      - name: Docker's daemon answers
+        if: ${{ !cancelled() }}
+        shell: pwsh
+        run: |
+          Start-Service docker -ErrorAction SilentlyContinue
+          for ($i = 0; $i -lt 36; $i++) {
+            $os = docker info --format '{{.OSType}}' 2>$null
+            if ($LASTEXITCODE -eq 0 -and $os) { "docker runs: $os"; exit 0 }
+            Start-Sleep -Seconds 5
+          }
+          Get-Service docker | Format-List
+          exit 1
       - name: On a Windows host
         if: ${{ !cancelled() }}
         working-directory: packages/shell
